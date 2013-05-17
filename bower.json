@@ -1,0 +1,12 @@
+{
+  "name": "boilerplate",
+  "version": "0.0.0",
+  "dependencies": {
+    "bootstrap": "*",
+    "requirejs": "*",
+    "modernizr": "*",
+    "jquery": "*"
+  },
+  "devDependencies": {
+  }
+}
