@@ -1,0 +1,33 @@
+{
+  "name": "boilerplate",
+  "version": "0.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-contrib-copy": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-coffee": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-compass": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-cssmin": "*",
+    "grunt-contrib-connect": "*",
+    "grunt-contrib-clean": "*",
+    "grunt-contrib-htmlmin": "*",
+    "grunt-bower-requirejs": "*",
+    "grunt-contrib-requirejs": "*",
+    "grunt-contrib-imagemin": "*",
+    "grunt-contrib-watch":"*",
+    "grunt-rev": "*",
+    "grunt-usemin": "*",
+    "grunt-mocha": "*",
+    "grunt-open": "*",
+    "grunt-svgmin": "*",
+    "grunt-concurrent": "*",
+    "matchdep": "*",
+    "connect-livereload": "*"
+  },
+  "engines": {
+    "node": ">=0.10.6"
+  }
+}
