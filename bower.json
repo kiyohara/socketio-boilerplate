@@ -2,7 +2,7 @@
   "name": "boilerplate",
   "version": "0.0.0",
   "dependencies": {
-    "bootstrap": "*",
+    "sass-bootstrap": "*",
     "requirejs": "*",
     "modernizr": "*",
     "jquery": "*"
