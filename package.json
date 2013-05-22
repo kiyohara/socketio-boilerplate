@@ -1,9 +1,14 @@
 {
   "name": "boilerplate",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "express": "*",
+    "jade": "*"
+  },
   "devDependencies": {
     "grunt": "*",
+    "grunt-develop": "*",
+    "grunt-regarde": "*",
     "grunt-contrib-copy": "*",
     "grunt-contrib-concat": "*",
     "grunt-contrib-coffee": "*",
