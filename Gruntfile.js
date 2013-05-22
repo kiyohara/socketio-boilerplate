@@ -24,7 +24,7 @@ module.exports = function(grunt) {
     // grunt-contrib-watch
     watch: {
       options: {
-        nospawn: true
+        nospawn: false
       },
 
       coffee: {
