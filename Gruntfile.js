@@ -336,7 +336,7 @@ module.exports = function(grunt) {
         exclude: ['modernizr']
       },
       all: {
-        rjsConfig: '<%= path.app %>/scripts/config.js'
+        rjsConfig: '<%= path.app %>/scripts/main.js'
       }
     }
   });
