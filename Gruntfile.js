@@ -13,8 +13,11 @@ module.exports = function(grunt) {
 
   // configurable paths
   var pathConfig = {
-    app: 'app',
-    dist: 'dist'
+    pub: {
+      src: 'public_src',
+      dist: 'public',
+      tmp: '.public_tmp'
+    }
   };
 
   // init config
@@ -28,7 +31,7 @@ module.exports = function(grunt) {
       },
 
       coffee: {
-        files: ['<%= path.app %>/scripts/{,*/}*.coffee'],
+        files: ['<%= path.pub.src %>/scripts/{,*/}*.coffee'],
         tasks: ['coffee:dist']
       },
 
@@ -38,7 +41,7 @@ module.exports = function(grunt) {
       },
 
       compass: {
-        files: ['<%= path.app %>/styles/{,*/}*.{scss,sass}'],
+        files: ['<%= path.pub.src %>/styles/{,*/}*.{scss,sass}'],
         tasks: ['compass:server']
       },
 
@@ -48,10 +51,10 @@ module.exports = function(grunt) {
         },
 
         files: [
-          '<%= path.app %>/*.html',
-          '{.tmp,<%= path.app %>}/styles/{,*/}*.css',
-          '{.tmp,<%= path.app %>}/scripts/{,*/}*.js',
-          '<%= path.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= path.pub.src %>/*.html',
+          '{<%= path.pub.tmp %>,<%= path.pub.src %>}/styles/{,*/}*.css',
+          '{<%= path.pub.tmp %>,<%= path.pub.src %>}/scripts/{,*/}*.js',
+          '<%= path.pub.src %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
     },
@@ -69,8 +72,8 @@ module.exports = function(grunt) {
         options: {
           middleware: function(connect) {
             return [
-              mountFolder(connect, '.tmp'),
-              mountFolder(connect, pathConfig.app),
+              mountFolder(connect, pathConfig.pub.tmp),
+              mountFolder(connect, pathConfig.pub.src),
               lrSnippet
             ];
           }
@@ -81,7 +84,7 @@ module.exports = function(grunt) {
         options: {
           middleware: function(connect) {
             return [
-              mountFolder(connect, '.tmp'),
+              mountFolder(connect, pathConfig.pub.tmp),
               mountFolder(connect, 'test')
             ];
           }
@@ -92,7 +95,7 @@ module.exports = function(grunt) {
         options: {
           middleware: function(connect) {
             return [
-              mountFolder(connect, pathConfig.dist)
+              mountFolder(connect, pathConfig.pub.dist)
             ];
           }
         }
@@ -112,13 +115,13 @@ module.exports = function(grunt) {
         files: [{
           dot: true,
           src: [
-            '.tmp',
-            '<%= path.dist %>/*',
-            '!<%= path.dist %>/.git*'
+            '<%= path.pub.tmp %>',
+            '<%= path.pub.dist %>/*',
+            '!<%= path.pub.dist %>/.git*'
           ]
         }]
       },
-      server: '.tmp'
+      server: pathConfig.pub.tmp
     },
 
     // grunt-contrib-jshint
@@ -128,8 +131,8 @@ module.exports = function(grunt) {
       },
       all: [
         'Gruntfile.js',
-        '<%= path.app %>/scripts/{,*/}*.js',
-        '!<%= path.app %>/scripts/vendor/*',
+        '<%= path.pub.src %>/scripts/{,*/}*.js',
+        '!<%= path.pub.src %>/scripts/vendor/*',
         'test/spec/{,*/}*.js'
       ]
     },
@@ -149,9 +152,9 @@ module.exports = function(grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= path.app %>/scripts',
+          cwd: '<%= path.pub.src %>/scripts',
           src: '{,*/}*.coffee',
-          dest: '.tmp/scripts',
+          dest: '<%= path.pub.tmp %>/scripts',
           ext: '.js'
         }]
       },
@@ -160,7 +163,7 @@ module.exports = function(grunt) {
           expand: true,
           cwd: 'test/spec',
           src: '{,*/}*.coffee',
-          dest: '.tmp/spec',
+          dest: '<%= path.pub.tmp %>/spec',
           ext: '.js'
         }]
       }
@@ -169,13 +172,13 @@ module.exports = function(grunt) {
     // grunt-contrib-compass
     compass: {
       options: {
-        sassDir: '<%= path.app %>/styles',
-        cssDir: '.tmp/styles',
-        generatedImagesDir: '.tmp/images/generated',
-        imagesDir: '<%= path.app %>/images',
-        javascriptsDir: '<%= path.app %>/scripts',
-        fontsDir: '<%= path.app %>/styles/fonts',
-        importPath: '<%= path.app %>/bower_components',
+        sassDir: '<%= path.pub.src %>/styles',
+        cssDir: '<%= path.pub.tmp %>/styles',
+        generatedImagesDir: '<%= path.pub.tmp %>/images/generated',
+        imagesDir: '<%= path.pub.src %>/images',
+        javascriptsDir: '<%= path.pub.src %>/scripts',
+        fontsDir: '<%= path.pub.src %>/styles/fonts',
+        importPath: '<%= path.pub.src %>/bower_components',
         httpImagesPath: '/images',
         httpGeneratedImagesPath: '/images/generated',
         relativeAssets: false
@@ -197,7 +200,7 @@ module.exports = function(grunt) {
     requirejs: {
       dist: {
         options: {
-          baseUrl: '<%= path.app %>/scripts',
+          baseUrl: '<%= path.pub.src %>/scripts',
           optimize: 'none',
           preserveLicenseComments: false,
           useStrict: true,
@@ -211,10 +214,10 @@ module.exports = function(grunt) {
       dist: {
         files: {
           src: [
-            '<%= path.dist %>/scripts/{,*/}*.js',
-            '<%= path.dist %>/styles/{,*/}*.css',
-            '<%= path.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
-            '<%= path.dist %>/styles/fonts/*'
+            '<%= path.pub.dist %>/scripts/{,*/}*.js',
+            '<%= path.pub.dist %>/styles/{,*/}*.css',
+            '<%= path.pub.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
+            '<%= path.pub.dist %>/styles/fonts/*'
           ]
         }
       }
@@ -223,16 +226,16 @@ module.exports = function(grunt) {
     // grunt-usemin
     useminPrepare: {
       options: {
-        dest: '<%= path.dist %>'
+        dest: '<%= path.pub.dist %>'
       },
-      html: '<%= path.app %>/index.html'
+      html: '<%= path.pub.src %>/index.html'
     },
     usemin: {
       options: {
-        dirs: ['<%= path.dist %>']
+        dirs: ['<%= path.pub.dist %>']
       },
-      html: ['<%= path.dist %>/{,*/}*.html'],
-      css: ['<%= path.dist %>/styles/{,*/}*.css']
+      html: ['<%= path.pub.dist %>/{,*/}*.html'],
+      css: ['<%= path.pub.dist %>/styles/{,*/}*.css']
     },
 
     // grunt-contrib-imagemin
@@ -240,9 +243,9 @@ module.exports = function(grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= path.app %>/images',
+          cwd: '<%= path.pub.src %>/images',
           src: '{,*/}*.{png,jpg,jpeg}',
-          dest: '<%= path.dist %>/images'
+          dest: '<%= path.pub.dist %>/images'
         }]
       }
     },
@@ -252,9 +255,9 @@ module.exports = function(grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= path.app %>/images',
+          cwd: '<%= path.pub.src %>/images',
           src: '{,*/}*.svg',
-          dest: '<%= path.dist %>/images'
+          dest: '<%= path.pub.dist %>/images'
         }]
       }
     },
@@ -263,9 +266,9 @@ module.exports = function(grunt) {
     cssmin: {
       dist: {
         files: {
-          '<%= path.dist %>/styles/main.css': [
-            '.tmp/styles/{,*/}*.css',
-            '<%= path.app %>/styles/{,*/}*.css'
+          '<%= path.pub.dist %>/styles/main.css': [
+            '<%= path.pub.tmp %>/styles/{,*/}*.css',
+            '<%= path.pub.src %>/styles/{,*/}*.css'
           ]
         }
       }
@@ -278,9 +281,9 @@ module.exports = function(grunt) {
         },
         files: [{
           expand: true,
-          cwd: '<%= path.app %>',
+          cwd: '<%= path.pub.src %>',
           src: '*.html',
-          dest: '<%= path.dist %>'
+          dest: '<%= path.pub.dist %>'
         }]
       }
     },
@@ -291,8 +294,8 @@ module.exports = function(grunt) {
         files: [{
           extend: true,
           dot: true,
-          cwd: '<%= path.app %>',
-          dest: '<%= path.dist %>',
+          cwd: '<%= path.pub.src %>',
+          dest: '<%= path.pub.dist %>',
           src: [
             '*.{ico,txt}',
             '.htaccess',
@@ -302,8 +305,8 @@ module.exports = function(grunt) {
         }, {
           // compass contents
           expand: true,
-          cwd: '.tmp/images',
-          dest: '<%= path.dist %>/images',
+          cwd: '<%= path.pub.tmp %>/images',
+          dest: '<%= path.pub.dist %>/images',
           src: [
             'generated/*'
           ]
@@ -336,7 +339,7 @@ module.exports = function(grunt) {
         exclude: ['modernizr']
       },
       all: {
-        rjsConfig: '<%= path.app %>/scripts/main.js'
+        rjsConfig: '<%= path.pub.src %>/scripts/main.js'
       }
     }
   });
