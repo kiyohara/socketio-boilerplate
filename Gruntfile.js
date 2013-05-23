@@ -292,7 +292,7 @@ module.exports = function(grunt) {
     copy: {
       dist: {
         files: [{
-          extend: true,
+          expand: true,
           dot: true,
           cwd: '<%= path.pub.src %>',
           dest: '<%= path.pub.dist %>',
