@@ -228,7 +228,7 @@ module.exports = function(grunt) {
       options: {
         dest: '<%= path.pub.dist %>'
       },
-      html: '<%= path.pub.src %>/index.html'
+      html: '<%= path.pub.src %>/*.html'
     },
     usemin: {
       options: {

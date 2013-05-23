@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  .container
+    .hero-unit
+      h1= title
+      p Welcome to #{title}
+
+      hr
+
+      h1 'Allo, 'Allo!
+      p You now have
+      ul
+        li HTML5 Boilerplate
+        li Twitter Bootstrap
+        li RequireJS
+
+      p installed.
+
+      h3 Enjoy coding! - Yeoman
+
+block style
+  include ../public/index_style.html
+
+block head_script
+  include ../public/index_head_script.html
+
+block body_script
+  include ../public/index_body_script.html
