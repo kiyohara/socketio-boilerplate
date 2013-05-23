@@ -1,13 +1,15 @@
 'use strict';
 
+var path = require('path');
+
 // config
-var conf = require('./config.json');
+var conf = require(path.resolve('config.json'));
 
 // Live Reload
 var LIVERELOAD_PORT = 35729;
 var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
 var mountFolder = function(connect, dir) {
-  return connect.static(require('path').resolve(dir));
+  return connect.static(path.resolve(dir));
 };
 
 module.exports = function(grunt) {
