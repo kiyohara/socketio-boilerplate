@@ -1,0 +1,18 @@
+{
+  "server": {
+    "port": 9000
+  },
+
+  "build": {
+    "path": {
+      "public": {
+        "src": "public_src",
+        "dist": "public",
+        "tmp": ".public_tmp"
+      },
+      "app": "app.js",
+      "views": "views",
+      "routes": "routes"
+    }
+  }
+}
