@@ -5,6 +5,9 @@ var path = require('path');
 // config
 var conf = require(path.resolve('config.json'));
 
+// server port
+var SERVER_PORT = conf.server.port || 3000;
+
 // Live Reload
 var LIVERELOAD_PORT = 35729;
 var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
@@ -61,7 +64,7 @@ module.exports = function(grunt) {
     // grunt-contrib-connect
     connect: {
       options: {
-        port: 9000,
+        port: SERVER_PORT,
         hostname: 'localhost'
         // '0.0.0.0' allow from outside
         // 'localhost' allow from self only
@@ -104,7 +107,7 @@ module.exports = function(grunt) {
     // grunt-open
     open: {
       server: {
-        path: 'http://localhost:<%= connect.options.port %>'
+        path: 'http://localhost:' + SERVER_PORT
       }
     },
 
