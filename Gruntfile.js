@@ -47,6 +47,19 @@ module.exports = function(grunt) {
         tasks: ['compass:server']
       },
 
+      express: {
+        files: [
+          '<%= path.app %>',
+          '<%= path.views %>/{,*/}*.jade',
+          '<%= path.routes %>/{,*/}*.js'
+        ],
+        options: {
+          nospawn: true,
+          livereload: LIVERELOAD_PORT
+        },
+        tasks: ['express:livereload']
+      },
+
       livereload: {
         options: {
           livereload: LIVERELOAD_PORT
@@ -58,6 +71,10 @@ module.exports = function(grunt) {
           '{<%= path.public.tmp %>,<%= path.public.src %>}/scripts/{,*/}*.js',
           '<%= path.public.src %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
+      },
+
+      keepalive: {
+        files: ['Gruntfile.js']
       }
     },
 
@@ -100,6 +117,24 @@ module.exports = function(grunt) {
               mountFolder(connect, pathConfig.public.dist)
             ];
           }
+        }
+      }
+    },
+
+    // grunt-express-server
+    express: {
+      options: {
+        port: SERVER_PORT
+      },
+      livereload: {
+        options: {
+          args: ['-c', 'config-livereload.json'],
+          script: 'app.js'
+        }
+      },
+      dist: {
+        options: {
+          script: 'app.js'
         }
       }
     },
@@ -349,13 +384,18 @@ module.exports = function(grunt) {
   // register task
   grunt.registerTask('server', function(target) {
     if (target === 'dist') {
-      return grunt.task.run(['build', 'open', 'connect:dist:keepalive']);
+      return grunt.task.run([
+        'build',
+        'express:dist',
+        'open',
+        'watch:keepalive'
+      ]);
     }
 
     grunt.task.run([
       'clean:server',
       'concurrent:server',
-      'connect:livereload',
+      'express:livereload',
       'open',
       'watch'
     ]);

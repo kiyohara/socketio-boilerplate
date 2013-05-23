@@ -2,13 +2,14 @@
   "name": "boilerplate",
   "version": "0.0.0",
   "dependencies": {
+    "optimist": "*",
+    "underscore": "*",
     "express": "*",
     "jade": "*"
   },
   "devDependencies": {
     "grunt": "*",
-    "grunt-develop": "*",
-    "grunt-regarde": "*",
+    "grunt-express-server": "*",
     "grunt-contrib-copy": "*",
     "grunt-contrib-concat": "*",
     "grunt-contrib-coffee": "*",
