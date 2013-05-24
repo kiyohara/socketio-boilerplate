@@ -54,7 +54,6 @@ module.exports = function(grunt) {
           '<%= path.routes %>/{,*/}*.js'
         ],
         options: {
-          nospawn: true,
           livereload: LIVERELOAD_PORT
         },
         tasks: ['express:livereload']
