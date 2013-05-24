@@ -51,7 +51,8 @@ module.exports = function(grunt) {
         files: [
           '<%= path.app %>',
           '<%= path.views %>/{,*/}*.jade',
-          '<%= path.routes %>/{,*/}*.js'
+          '<%= path.routes %>/{,*/}*.js',
+          '<%= path.lib %>/{,*/}*.js'
         ],
         options: {
           livereload: LIVERELOAD_PORT

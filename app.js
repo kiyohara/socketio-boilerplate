@@ -61,7 +61,8 @@ config = _.extend(configDefault, config);
 
 // setup express
 var app = express(),
-    routes = require('./routes').config(config),
+    config = require('./lib/config').set(config),
+    routes = require('./routes'),
     user = require('./routes/user');
 
 app.configure(function(){
@@ -74,7 +75,7 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(app.router);
 
-  var pub = config.server.path.public || 'public';
+  var pub = config.get().server.path.public || 'public';
   console.log('Mount static dir : ' + pub);
   if (pub.forEach) {
     pub.forEach(function(dir) {
