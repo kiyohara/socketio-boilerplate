@@ -17,7 +17,6 @@ var requireConfig = function(confPath) {
   }
 
   var _path = path.resolve(confPath);
-  console.log(('!!!' + _path + '!!!').red);
   if (!fs.existsSync(_path)) {
     throw('No such config : ' + confPath);
   } else {
