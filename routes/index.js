@@ -3,8 +3,8 @@
 /*
  * GET home page.
  */
-var config = require('../lib/config');
+var config = require('../lib/app-share').config;
 
 exports.index = function(req, res){
-  res.render('index', { basedir: config.get().server.path.include, title: 'Express' });
+  res.render('index', { basedir: config.server.path.include, title: 'Express' });
 };

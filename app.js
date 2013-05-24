@@ -4,28 +4,18 @@
  * Module dependencies.
  */
 
-var _ = require('underscore'),
-    express = require('express'),
+var express = require('express'),
     http = require('http'),
-    fs   = require('fs'),
     path = require('path');
 
-// config file handler
-var requireConfig = function(confPath) {
-  if (typeof confPath === 'boolean') {
-    throw('Config path required');
-  }
+// app global share area
+var appShare = require('./lib/app-share');
 
-  var _path = path.resolve(confPath);
-  if (!fs.existsSync(_path)) {
-    throw('No such config : ' + confPath);
-  } else {
-    return require(_path);
-  }
-};
+// app config
+var config = require('./lib/config').defaults();
+appShare.config = config; // save to share
 
 // parse arguments
-var config = {};
 var argv = require('optimist')
   .options('c', {
     string: true,
@@ -33,19 +23,10 @@ var argv = require('optimist')
     describe: 'config json'
   })
   .check(function(argv) {
-    // config
-    var _config;
+    // update config
     if (argv.c) {
-      var confPath = argv.c;
-
-      if (confPath.forEach) {
-        confPath.each(function(i) {
-          _config = requireConfig(i);
-          config = _.extend(_config, config);
-        });
-      } else {
-        config = requireConfig(confPath);
-      }
+      config = require('./lib/config').read(argv.c);
+      appShare.config = config; // save to share
     }
   })
   .argv
@@ -55,13 +36,8 @@ if (!argv) {
   process.exit(1);
 }
 
-// update config w/ defaults
-var configDefault = require(__dirname + '/config.json');
-config = _.extend(configDefault, config);
-
 // setup express
 var app = express(),
-    config = require('./lib/config').set(config),
     routes = require('./routes'),
     user = require('./routes/user');
 
@@ -75,7 +51,7 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(app.router);
 
-  var pub = config.get().server.path.public || 'public';
+  var pub = config.server.path.public || 'public';
   console.log('Mount static dir : ' + pub);
   if (pub.forEach) {
     pub.forEach(function(dir) {
