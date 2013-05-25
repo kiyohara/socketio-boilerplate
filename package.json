@@ -5,7 +5,8 @@
     "optimist": "*",
     "underscore": "*",
     "express": "*",
-    "jade": "*"
+    "jade": "*",
+    "socket.io": "*"
   },
   "devDependencies": {
     "grunt": "*",

@@ -241,7 +241,7 @@ module.exports = function(grunt) {
           optimize: 'none',
           preserveLicenseComments: false,
           useStrict: true,
-          wrap: true
+          wrap: false // for socket.io-client
         }
       }
     },

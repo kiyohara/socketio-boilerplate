@@ -69,6 +69,31 @@ app.configure('development', function(){
 app.get('/', routes.index);
 app.get('/users', user.list);
 
-http.createServer(app).listen(app.get('port'), function(){
+
+// http server w/ socket.io
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
+
+server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
+});
+
+// socket.io configuration
+io.configure('production', function(){
+  io.set('log level', 1);
+});
+
+io.configure('development', function(){
+  io.set('log level', 2);
+});
+
+// socket.io handling
+io.sockets.on('connection', function(socket) {
+  console.log('!! socket.io connected !!');
+
+  socket.on('pong', function(data) {
+    console.log('pong : ' + data.msg);
+  });
+
+  socket.emit('ping', { msg: 'Hello socket.io !!' });
 });

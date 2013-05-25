@@ -5,7 +5,8 @@
     "sass-bootstrap": "*",
     "requirejs": "*",
     "modernizr": "*",
-    "jquery": "*"
+    "jquery": "*",
+    "socket.io-client": "*"
   },
   "devDependencies": {
   }
