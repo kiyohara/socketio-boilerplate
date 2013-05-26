@@ -82,12 +82,12 @@ server.listen(app.get('port'), function(){
 });
 
 // socket.io configuration
-io.configure('production', function(){
-  io.set('log level', 1);
+io.configure(function(){
+  io.set('log level', 2);
 });
 
-io.configure('development', function(){
-  io.set('log level', 2);
+io.configure('development', function() {
+  io.set('log level', 3);
 });
 
 // socket.io handling
