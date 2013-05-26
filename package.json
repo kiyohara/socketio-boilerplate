@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "grunt": "*",
-    "grunt-express-server": "*",
+    "grunt-express": "*",
     "grunt-contrib-copy": "*",
     "grunt-contrib-concat": "*",
     "grunt-contrib-coffee": "*",

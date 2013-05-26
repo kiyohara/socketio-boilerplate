@@ -100,3 +100,9 @@ io.sockets.on('connection', function(socket) {
 
   socket.emit('ping', { msg: 'Hello socket.io !!' });
 });
+
+// module exports for grunt-express
+server.use = function() {
+  app.use.apply(app, arguments);
+};
+module.exports = server;

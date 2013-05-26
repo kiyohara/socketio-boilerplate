@@ -57,7 +57,7 @@ module.exports = function(grunt) {
         options: {
           livereload: LIVERELOAD_PORT
         },
-        tasks: ['express:livereload']
+        tasks: ['express-restart']
       },
 
       livereload: {
@@ -71,10 +71,6 @@ module.exports = function(grunt) {
           '{<%= path.public.tmp %>,<%= path.public.src %>}/scripts/{,*/}*.js',
           '<%= path.public.src %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
-      },
-
-      keepalive: {
-        files: ['Gruntfile.js']
       }
     },
 
@@ -121,20 +117,22 @@ module.exports = function(grunt) {
       }
     },
 
-    // grunt-express-server
+    // grunt-express
     express: {
       options: {
-        port: SERVER_PORT
+        port: SERVER_PORT,
+        server: path.resolve('./app')
       },
       livereload: {
         options: {
-          args: ['-c', 'config-livereload.json'],
-          script: 'app.js'
+          monitor: {
+            env: { 'NODE_ENV': 'livereload' }
+          },
+          debug: true
         }
       },
       dist: {
         options: {
-          script: 'app.js'
         }
       }
     },
@@ -388,7 +386,7 @@ module.exports = function(grunt) {
         'build',
         'express:dist',
         'open',
-        'watch:keepalive'
+        'express-keepalive'
       ]);
     }
 
