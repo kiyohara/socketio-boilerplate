@@ -8,11 +8,14 @@ var express = require('express'),
     http = require('http'),
     path = require('path');
 
+// env
+var NODE_ENV = process.env.NODE_ENV;
+
 // app global share area
 var appShare = require('./lib/app-share');
 
 // app config
-var config = require('./lib/config').defaults();
+var config = require('./lib/config').defaults(NODE_ENV);
 appShare.config = config; // save to share
 
 // parse arguments
@@ -25,7 +28,7 @@ var argv = require('optimist')
   .check(function(argv) {
     // update config
     if (argv.c) {
-      config = require('./lib/config').read(argv.c);
+      config = require('./lib/config').read(argv.c, NODE_ENV);
       appShare.config = config; // save to share
     }
   })

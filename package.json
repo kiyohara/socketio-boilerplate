@@ -4,6 +4,7 @@
   "dependencies": {
     "optimist": "*",
     "underscore": "*",
+    "jquery": "*",
     "express": "*",
     "jade": "*",
     "socket.io": "*"
