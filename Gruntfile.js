@@ -47,29 +47,23 @@ module.exports = function(grunt) {
         tasks: ['compass:server']
       },
 
-      express: {
-        files: [
-          '<%= path.app %>',
-          '<%= path.views %>/{,*/}*.jade',
-          '<%= path.routes %>/{,*/}*.js',
-          '<%= path.lib %>/{,*/}*.js'
-        ],
-        options: {
-          livereload: LIVERELOAD_PORT
-        },
-        tasks: ['express-restart']
-      },
-
       livereload: {
         options: {
           livereload: LIVERELOAD_PORT
         },
 
         files: [
+          // static/preprocessed files
           '<%= path.public.src %>/*.html',
           '{<%= path.public.tmp %>,<%= path.public.src %>}/styles/{,*/}*.css',
           '{<%= path.public.tmp %>,<%= path.public.src %>}/scripts/{,*/}*.js',
-          '<%= path.public.src %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= path.public.src %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+
+          // express files (js monitored by grunt-express)
+          '<%= path.views %>/{,*/}*.jade',
+
+          // other hooks
+          '<%= path.hooks %>/livereload'
         ]
       }
     },

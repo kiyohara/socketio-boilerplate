@@ -6,6 +6,7 @@
 
 var express = require('express'),
     http = require('http'),
+    fs = require('fs'),
     path = require('path');
 
 // env
@@ -67,6 +68,14 @@ app.configure(function(){
 
 app.configure('development', function(){
   app.use(express.errorHandler());
+});
+
+// hook livereload
+app.configure('livereload', function() {
+  var hookPath = path.resolve(path.join(config.build.path.hooks, 'livereload'));
+  fs.exists(hookPath, function(exists) {
+    if (exists) { fs.writeFile(hookPath, ''); }
+  });
 });
 
 app.get('/', routes.index);

@@ -10,6 +10,7 @@
 
   "build": {
     "path": {
+      "hooks": ".hooks",
       "public": {
         "src": "public_src",
         "dist": "public",
