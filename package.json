@@ -2,9 +2,8 @@
   "name": "boilerplate",
   "version": "0.0.0",
   "dependencies": {
-    "optimist": "*",
+    "config": "*",
     "underscore": "*",
-    "jquery": "*",
     "express": "*",
     "jade": "*",
     "socket.io": "*"

@@ -3,3 +3,4 @@ public
 .public_tmp
 .sass-cache
 public_src/bower_components
+config/runtime.json

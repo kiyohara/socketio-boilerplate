@@ -3,7 +3,7 @@
 var path = require('path');
 
 // config
-var conf = require(path.resolve('config.json'));
+var conf = require('config');
 
 // server port
 var SERVER_PORT = conf.server.port || 3000;

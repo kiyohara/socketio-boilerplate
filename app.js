@@ -4,41 +4,17 @@
  * Module dependencies.
  */
 
-var express = require('express'),
+var config = require('config'),
+    express = require('express'),
     http = require('http'),
     fs = require('fs'),
     path = require('path');
 
-// env
-var NODE_ENV = process.env.NODE_ENV;
-
 // app global share area
 var appShare = require('./lib/app-share');
 
-// app config
-var config = require('./lib/config').defaults(NODE_ENV);
-appShare.config = config; // save to share
-
-// parse arguments
-var argv = require('optimist')
-  .options('c', {
-    string: true,
-    alias: 'config',
-    describe: 'config json'
-  })
-  .check(function(argv) {
-    // update config
-    if (argv.c) {
-      config = require('./lib/config').read(argv.c, NODE_ENV);
-      appShare.config = config; // save to share
-    }
-  })
-  .argv
-;
-if (!argv) {
-  console.error('Internal error');
-  process.exit(1);
-}
+// config save to share
+appShare.config = config;
 
 // setup express
 var app = express(),
