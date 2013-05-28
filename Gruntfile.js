@@ -33,7 +33,7 @@ module.exports = function(grunt) {
 
       coffee: {
         files: ['<%= path.public.src %>/scripts/{,*/}*.coffee'],
-        tasks: ['coffee:dist']
+        tasks: ['coffee:server']
       },
 
       coffeeTest: {
@@ -148,7 +148,10 @@ module.exports = function(grunt) {
 
     // grunt-contrib-coffee
     coffee: {
-      dist: {
+      server: {
+        options: {
+          sourceMap: true
+        },
         files: [{
           expand: true,
           cwd: '<%= path.public.src %>/scripts',
@@ -199,7 +202,7 @@ module.exports = function(grunt) {
     requirejs: {
       dist: {
         options: {
-          baseUrl: '<%= path.public.src %>/scripts',
+          baseUrl: '<%= path.public.tmp %>/scripts',
           optimize: 'none',
           preserveLicenseComments: false,
           useStrict: true,
@@ -227,7 +230,7 @@ module.exports = function(grunt) {
       options: {
         dest: '<%= path.public.dist %>'
       },
-      html: '<%= path.public.src %>/*.html'
+      html: '<%= path.public.tmp %>/*.html'
     },
     usemin: {
       options: {
@@ -289,6 +292,16 @@ module.exports = function(grunt) {
 
     // grunt-contrib-copy
     copy: {
+      useminPrepare: {
+        files: [{
+          expand: true,
+          cwd: '<%= path.public.src %>',
+          dest: '<%= path.public.tmp %>',
+          src: [
+            '**/*.{html,js,css}'
+          ]
+        }]
+      },
       dist: {
         files: [{
           expand: true,
@@ -316,7 +329,7 @@ module.exports = function(grunt) {
     // grunt-concurrent
     concurrent: {
       server: [
-        'coffee:dist',
+        'coffee:server',
         'compass:server'
       ],
       test: [
@@ -372,8 +385,9 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'useminPrepare',
     'concurrent:dist',
+    'copy:useminPrepare',
+    'useminPrepare',
     'requirejs',
     'cssmin',
     'concat',
