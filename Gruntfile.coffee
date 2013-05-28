@@ -29,9 +29,13 @@ module.exports = (grunt) ->
       options:
         nospawn: false
 
+      gruntfile:
+        files: ['Gruntfile.coffee']
+        tasks: ['coffeelint:gruntfile']
+
       coffee:
         files: ['<%= path.public.src %>/scripts/{,*/}*.coffee']
-        tasks: ['coffee:server']
+        tasks: ['coffeelint:server', 'coffee:server']
 
       coffeeTest:
         files: ['test/spec/{,*/}*.coffee']
@@ -114,11 +118,20 @@ module.exports = (grunt) ->
         jshintrc: '.jshintrc'
 
       all: [
-        'Gruntfile.js'
         '<%= path.public.src %>/scripts/{,*/}*.js'
         '!<%= path.public.src %>/scripts/vendor/*'
         'test/spec/{,*/}*.js'
       ]
+
+    # grunt-coffeelint
+    coffeelint:
+      gruntfile:
+        files:
+          src: ['Gruntfile.coffee']
+
+      server:
+        files:
+          src: ['<%= path.public.src %>/scripts/{,*/}*.coffee']
 
     # grunt-mocha
     mocha:
@@ -347,6 +360,7 @@ module.exports = (grunt) ->
   # register task - default
   grunt.registerTask 'default', [
     'jshint'
+    'coffeelint'
     'test'
     'build'
   ]

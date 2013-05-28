@@ -18,6 +18,7 @@
     "grunt-contrib-uglify": "*",
     "grunt-contrib-compass": "*",
     "grunt-contrib-jshint": "*",
+    "grunt-coffeelint": "*",
     "grunt-contrib-cssmin": "*",
     "grunt-contrib-connect": "*",
     "grunt-contrib-clean": "*",
