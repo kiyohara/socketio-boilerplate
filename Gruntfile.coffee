@@ -61,6 +61,10 @@ module.exports = (grunt) ->
 
     # grunt-contrib-connect
     connect:
+      options:
+        port: SERVER_PORT
+        hostname: 'localhost'
+
       test:
         options:
           middleware: (connect) ->
@@ -121,7 +125,7 @@ module.exports = (grunt) ->
       all:
         options:
           run: true
-          urls: ['http://localhost:<%= connect.options.port %>/index.html']
+          urls: ["http://localhost:#{SERVER_PORT}/index.html"]
 
     # grunt-contrib-coffee
     coffee:
