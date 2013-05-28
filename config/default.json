@@ -21,5 +21,10 @@
       "routes": "routes",
       "lib": "lib"
     }
+  },
+
+  "livereload": {
+    "port": 35729,
+    "excludeList": [".woff", ".js", ".css", ".ico"]
   }
 }

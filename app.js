@@ -29,7 +29,6 @@ app.configure(function(){
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(app.router);
 
   var pub = config.server.path.public || 'public';
   console.log('Mount static dir : ' + pub);
@@ -46,14 +45,22 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-// hook livereload
+// livereload
 app.configure('livereload', function() {
+  // livereload script middleware
+  app.use(require('connect-livereload')({
+    port: config.livereload.port,
+    excludeList: config.livereload.excludeList
+  }));
+
+  // hook livereload (cf. Gruntfile.js watch)
   var hookPath = path.resolve(path.join(config.build.path.hooks, 'livereload'));
   fs.exists(hookPath, function(exists) {
     if (exists) { fs.writeFile(hookPath, ''); }
   });
 });
 
+app.use(app.router);
 app.get('/', routes.index);
 app.get('/users', user.list);
 

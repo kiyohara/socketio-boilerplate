@@ -9,7 +9,7 @@ var conf = require('config');
 var SERVER_PORT = conf.server.port || 3000;
 
 // Live Reload
-var LIVERELOAD_PORT = 35729;
+var LIVERELOAD_PORT = conf.livereload.port || 35729;
 var mountFolder = function(connect, dir) {
   return connect.static(path.resolve(dir));
 };
@@ -78,7 +78,7 @@ module.exports = function(grunt) {
             ];
           }
         }
-      },
+      }
     },
 
     // grunt-express
