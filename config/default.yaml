@@ -3,7 +3,7 @@ server:
   path:
     public: "public"
     views: "views"
-    include: "public"
+    includes: "public"
 
 build:
   path:

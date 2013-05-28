@@ -3,4 +3,4 @@ server:
     public:
       - ".public_tmp"
       - "public_src"
-    include: "public_src"
+    includes: "public_src"
