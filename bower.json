@@ -2,11 +2,11 @@
   "name": "boilerplate",
   "version": "0.0.0",
   "dependencies": {
-    "sass-bootstrap": "*",
-    "requirejs": "*",
-    "modernizr": "*",
-    "jquery": "*",
-    "socket.io-client": "*"
+    "sass-bootstrap": "latest",
+    "requirejs": "latest",
+    "modernizr": "latest",
+    "jquery": "latest",
+    "socket.io-client": "latest"
   },
   "devDependencies": {
   }
