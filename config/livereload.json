@@ -1,8 +1,0 @@
-{
-  "server": {
-    "path": {
-      "public": [".public_tmp","public_src"],
-      "include": "public_src"
-    }
-  }
-}

@@ -1,0 +1,27 @@
+server:
+  port: 9000
+  path:
+    public: "public"
+    views: "views"
+    include: "public"
+
+build:
+  path:
+    hooks: ".hooks"
+    public:
+      src: "public_src"
+      dist: "public"
+      tmp: ".public_tmp"
+
+    app: "app.js"
+    views: "views"
+    routes: "routes"
+    lib: "lib"
+
+livereload:
+  port: 35729
+  excludeList:
+    - ".woff"
+    - ".js"
+    - ".css"
+    - ".ico"
