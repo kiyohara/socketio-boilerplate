@@ -10,12 +10,6 @@ var config = require('config'),
     fs = require('fs'),
     path = require('path');
 
-// app global share area
-var appShare = require('./lib/app-share');
-
-// config save to share
-appShare.config = config;
-
 // setup express
 var app = express(),
     routes = require('./routes'),
@@ -26,6 +20,7 @@ app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.locals.basedir = config.server.path.includes;
+
   app.use(express.favicon());
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
