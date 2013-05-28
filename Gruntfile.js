@@ -10,7 +10,6 @@ var SERVER_PORT = conf.server.port || 3000;
 
 // Live Reload
 var LIVERELOAD_PORT = 35729;
-var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
 var mountFolder = function(connect, dir) {
   return connect.static(path.resolve(dir));
 };
@@ -70,25 +69,6 @@ module.exports = function(grunt) {
 
     // grunt-contrib-connect
     connect: {
-      options: {
-        port: SERVER_PORT,
-        hostname: 'localhost'
-        // '0.0.0.0' allow from outside
-        // 'localhost' allow from self only
-      },
-
-      livereload: {
-        options: {
-          middleware: function(connect) {
-            return [
-              mountFolder(connect, pathConfig.public.tmp),
-              mountFolder(connect, pathConfig.public.src),
-              lrSnippet
-            ];
-          }
-        }
-      },
-
       test: {
         options: {
           middleware: function(connect) {
@@ -99,16 +79,6 @@ module.exports = function(grunt) {
           }
         }
       },
-
-      dist: {
-        options: {
-          middleware: function(connect) {
-            return [
-              mountFolder(connect, pathConfig.public.dist)
-            ];
-          }
-        }
-      }
     },
 
     // grunt-express
