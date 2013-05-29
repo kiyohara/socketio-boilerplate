@@ -7,7 +7,7 @@ express:
   routes: "routes"
   views: "views"
   statics: "../public"
-  includes: "../public"
+  includes: "../public/includes"
 
 statics:
   src: "app/assets"

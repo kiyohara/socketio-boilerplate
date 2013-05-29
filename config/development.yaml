@@ -2,4 +2,4 @@ express:
   statics:
     - "../.tmp"
     - "assets"
-  includes: "assets"
+  includes: "assets/includes"

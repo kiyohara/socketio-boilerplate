@@ -185,6 +185,11 @@ module.exports = (grunt) ->
     # grunt-contrib-concat
     concat:
       dist: {}
+      useminPrepare:
+        src: [
+          path.resolve conf.statics.src, "{,*/}*.html"
+        ]
+        dest: "#{conf.statics.tmp}/_useminPrepare.html"
 
     # grunt-contrib-requirejs
     requirejs:
@@ -211,12 +216,13 @@ module.exports = (grunt) ->
     useminPrepare:
       options:
         dest: "#{conf.statics.dist}"
-      html: "#{conf.statics.tmp}/*.html"
+      html: "#{conf.statics.tmp}/_useminPrepare.html"
 
     usemin:
       options:
         dirs: ["#{conf.statics.dist}"]
-      html: ["#{conf.statics.dist}/{,*/}*.html"],
+        basedir: "#{conf.statics.dist}"
+      html: ["#{conf.statics.dist}/{,*/}*.html"]
       css: ["#{conf.statics.dist}/styles/{,*/}*.css"]
 
     # grunt-contrib-imagemin
@@ -256,7 +262,7 @@ module.exports = (grunt) ->
         files: [
           expand: true
           cwd: "#{conf.statics.src}"
-          src: '*.html'
+          src: '{,*/}*.html'
           dest: "#{conf.statics.dist}"
         ]
 
@@ -347,6 +353,7 @@ module.exports = (grunt) ->
     'clean:dist'
     'concurrent:dist'
     'copy:useminPrepare'
+    'concat:useminPrepare'
     'useminPrepare'
     'requirejs'
     'cssmin'
