@@ -5,36 +5,41 @@
  */
 
 var config = require('config'),
+    _ = require('underscore'),
     express = require('express'),
     http = require('http'),
     fs = require('fs'),
     path = require('path');
 
+// path
+var routesDir   = path.resolve(__dirname, config.express.routes),
+    viewsDir    = path.resolve(__dirname, config.express.views),
+    includesDir = path.resolve(__dirname, config.express.includes),
+    staticsDir  = [];
+_.flatten([config.express.statics]).forEach(function(_path) {
+  staticsDir.push(path.resolve(__dirname, _path));
+});
+
 // setup express
 var app = express(),
-    routes = require('./routes'),
-    user = require('./routes/user');
+    routes = require(routesDir),
+    user = require(path.join(routesDir, 'user'));
 
 app.configure(function(){
   app.set('port', process.env.PORT || config.server.port);
-  app.set('views', __dirname + '/views');
+  app.set('views', viewsDir);
   app.set('view engine', 'jade');
-  app.locals.basedir = config.server.path.includes;
+
+  app.locals.basedir = includesDir;
 
   app.use(express.favicon());
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
 
-  var pub = config.server.path.public || 'public';
-  console.log('Mount static dir : ' + pub);
-  if (pub.forEach) {
-    pub.forEach(function(dir) {
-      app.use(express.static(path.join(__dirname, dir)));
-    });
-  } else {
-    app.use(express.static(path.join(__dirname, pub)));
-  }
+  staticsDir.forEach(function(_dir) {
+    app.use(express.static(_dir));
+  });
 });
 
 app.configure('development', function(){
@@ -50,7 +55,7 @@ app.configure('livereload', function() {
   }));
 
   // hook livereload (cf. Gruntfile.js watch)
-  var hookPath = path.resolve(path.join(config.build.path.hooks, 'livereload'));
+  var hookPath = path.resolve(config.hooks.dir, config.hooks.livereload);
   fs.exists(hookPath, function(exists) {
     if (exists) { fs.writeFile(hookPath, ''); }
   });

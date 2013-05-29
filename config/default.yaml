@@ -1,22 +1,17 @@
 server:
   port: 9000
-  path:
-    public: "public"
-    views: "views"
-    includes: "public"
 
-build:
-  path:
-    hooks: ".hooks"
-    public:
-      src: "public_src"
-      dist: "public"
-      tmp: ".public_tmp"
+express:
+  app: "app/app.js"
+  routes: "routes"
+  views: "views"
+  statics: "../public"
+  includes: "../public"
 
-    app: "app.js"
-    views: "views"
-    routes: "routes"
-    lib: "lib"
+statics:
+  src: "app/assets"
+  tmp: ".tmp"
+  dist: "public"
 
 livereload:
   port: 35729
@@ -25,3 +20,7 @@ livereload:
     - ".js"
     - ".css"
     - ".ico"
+
+hooks:
+  dir: ".hooks"
+  livereload: "livereload"

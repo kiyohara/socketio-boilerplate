@@ -1,6 +1,6 @@
 node_modules
 public
-.public_tmp
+.tmp
 .sass-cache
-public_src/bower_components
+app/assets/bower_components
 config/runtime.json

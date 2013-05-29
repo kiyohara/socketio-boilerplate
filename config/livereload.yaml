@@ -1,6 +1,5 @@
-server:
-  path:
-    public:
-      - ".public_tmp"
-      - "public_src"
-    includes: "public_src"
+express:
+  statics:
+    - "../.tmp"
+    - "assets"
+  includes: "assets"
