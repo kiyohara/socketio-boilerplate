@@ -13,15 +13,16 @@ require.config(
 require(['jquery', 'socketio', 'bootstrap'], ($, io) ->
   'use strict'
 
-  console.log 'socket.io connect to localhost'
-  socket = io.connect 'http://localhost'
-
-  socket.on 'ping', (data) ->
-    console.log data
-    $('#socket_io_msg').text("loading success : #{data.msg}")
-
-    socket.emit('pong', { msg: 'socket.io - pong' })
-
   $ ->
-    console.log 'scripts onload'
+    setTimeout ->
+      socket = io.connect 'http://localhost'
+
+      socket.on 'ping', (data) ->
+        $('#socket_io_msg')
+          .removeClass('text-info')
+          .addClass('text-success')
+          .text("connected : #{data.msg}")
+
+        socket.emit('pong', { msg: 'socket.io - pong' })
+    , 3000
 )
