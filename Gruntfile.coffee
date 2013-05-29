@@ -54,7 +54,7 @@ module.exports = (grunt) ->
           "#{conf.statics.src}/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}"
 
           # express files (js monitored by grunt-express)
-          "#{conf.express.views}/{,*/}*.jade"
+          "#{conf.express.basedir}/#{conf.express.views}/{,*/}*.jade"
 
           # other hooks
           "#{conf.hooks.dir}/#{conf.hooks.livereload}"
@@ -78,7 +78,7 @@ module.exports = (grunt) ->
     express:
       options:
         port: SERVER_PORT
-        server: path.resolve conf.express.app
+        server: path.resolve conf.express.basedir, conf.express.app
 
       development:
         options:

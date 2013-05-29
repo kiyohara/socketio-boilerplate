@@ -2,7 +2,8 @@ server:
   port: 9000
 
 express:
-  app: "app/app.js"
+  basedir: "app"
+  app: "app.js"
   routes: "routes"
   views: "views"
   statics: "../public"
