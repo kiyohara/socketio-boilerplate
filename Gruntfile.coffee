@@ -80,16 +80,19 @@ module.exports = (grunt) ->
         port: SERVER_PORT
         server: path.resolve conf.express.app
 
-      livereload:
+      development:
         options:
           monitor:
             env:
-              NODE_ENV: 'livereload'
+              NODE_ENV: 'development'
 
           debug: true
 
-      dist:
-        options: {}
+      production:
+        options:
+          monitor:
+            env:
+              NODE_ENV: 'production'
 
     # grunt-open
     open:
@@ -319,7 +322,7 @@ module.exports = (grunt) ->
     if (target is 'dist')
       return grunt.task.run [
         'build',
-        'express:dist',
+        'express:production',
         'open',
         'express-keepalive'
       ]
@@ -327,7 +330,7 @@ module.exports = (grunt) ->
     grunt.task.run [
       'clean:server'
       'concurrent:server'
-      'express:livereload'
+      'express:development'
       'open'
       'watch'
     ]

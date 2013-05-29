@@ -44,10 +44,7 @@ app.configure(function(){
 
 app.configure('development', function(){
   app.use(express.errorHandler());
-});
 
-// livereload
-app.configure('livereload', function() {
   // livereload script middleware
   app.use(require('connect-livereload')({
     port: config.livereload.port,
@@ -75,8 +72,8 @@ server.listen(app.get('port'), function(){
 });
 
 // socket.io configuration
-io.configure(function(){
-  io.set('log level', 2);
+io.configure('production', function(){
+  io.set('log level', 1);
 });
 
 io.configure('development', function() {
