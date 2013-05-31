@@ -2,14 +2,35 @@ extends layout
 
 block content
   .container
+    .page-header
+      h1
+        i.icon-laptop
+        | &nbsp;My socket.io application
+
+    .hero-unit
+      h1 Socket.io
+
+      .ping-unit
+        // form.form-inline(action='javascript:void(0)')
+        .input-append
+          input#name(type='text',placeholder='your name')
+          button#ping.btn.btn-info ping
+        #wait_msg.text-right.text-info &nbsp; ... Just a moment.
+
+      .pong-unit
+        .text-success
+          i.icon-ok &nbsp;
+          | Pong recieved
+        .well.text-center
+          #msg
+        .muted.text-right
+          small
+            i.icon-time &nbsp;
+            span#time
+
     .hero-unit
       h1= title
       p Welcome to #{title}
-
-      hr
-
-      h1 Socket.io
-      p#socket_io_msg.text-info connecting...
 
       hr
 

@@ -6,7 +6,14 @@ $fontAwesomePath: "./font";
 @import 'font-awesome/sass/font-awesome.scss';
 @import 'sass-bootstrap/lib/responsive';
 
+.ping-unit {
+  margin: 20px;
+}
+.pong-unit {
+  display: none;
+}
+
 .hero-unit {
-    margin: 50px auto 0 auto;
-    width: 340px;
+  margin: 50px auto 0 auto;
+  width: 340px;
 }

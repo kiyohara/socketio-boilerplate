@@ -14,15 +14,24 @@ require(['jquery', 'socketio', 'bootstrap'], ($, io) ->
   'use strict'
 
   $ ->
+    $('#ping').attr 'disabled', 'disabled'
+    $('.pong-unit').hide()
+
     setTimeout ->
       socket = io.connect 'http://localhost'
 
-      socket.on 'ping', (data) ->
-        $('#socket_io_msg')
-          .removeClass('text-info')
-          .addClass('text-success')
-          .text("connected : #{data.msg}")
+      socket.on 'pong', (data) ->
+        $('.pong-unit #msg').text "#{data.msg}"
+        $('.pong-unit #time').text "#{data.time}"
+        $('.pong-unit').show 'fast'
 
-        socket.emit('pong', { msg: 'socket.io - pong' })
-    , 3000
+      $('#ping').click () ->
+        if socket
+          socket.emit 'ping',
+            msg: 'ping'
+            name: $("#name").val()
+
+      .removeAttr 'disabled'
+      $('#wait_msg').hide 'fast'
+    , 2000
 )

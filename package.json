@@ -12,6 +12,8 @@
   "dependencies": {
     "config": "latest",
     "yaml": "latest",
+    "cli-color": "latest",
+    "moment": "latest",
     "underscore": "latest",
     "express": "latest",
     "jade": "latest",

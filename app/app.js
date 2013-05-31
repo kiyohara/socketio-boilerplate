@@ -5,6 +5,8 @@
  */
 
 var config = require('config'),
+    c = require('cli-color'),
+    moment = require('moment'),
     _ = require('underscore'),
     express = require('express'),
     http = require('http'),
@@ -82,13 +84,24 @@ io.configure('development', function() {
 
 // socket.io handling
 io.sockets.on('connection', function(socket) {
-  console.log('!! socket.io connected !!');
+  console.log(c.blue('socket.io: ') + 'Connected');
 
-  socket.on('pong', function(data) {
-    console.log('pong : ' + data.msg);
+  var nameDefault = 'Socket.io';
+  socket.on('ping', function(data) {
+    var _now = moment().format('YYYY.MM.DD hh:mm:ss');
+    var _msg = 'Hello ' + (data.name ? data.name : nameDefault) + ' !!';
+
+    console.log(
+      c.blue('socket.io: ') + 'Recieved ping -> { ' +
+      c.yellow(data.name) + ' : ' + c.yellow(data.msg) + ' }'
+    );
+    console.log(
+      c.blue('socket.io: ') + 'Send pong -> { ' +
+      c.yellow(_msg) + ' : ' + c.yellow(_now) + ' }'
+    );
+
+    socket.emit('pong', { msg: _msg, time: _now });
   });
-
-  socket.emit('ping', { msg: 'Hello socket.io !!' });
 });
 
 // module exports for grunt-express
