@@ -1,6 +1,14 @@
 {
-  "name": "boilerplate",
+  "name": "socketio-boilerplate",
   "version": "0.0.0",
+  "description": "My socket.io application's boilerplate",
+  "main": "app/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "Tomokazu Kiyohara",
+  "license": "MIT",
   "dependencies": {
     "config": "latest",
     "yaml": "latest",
@@ -35,8 +43,5 @@
     "grunt-concurrent": "latest",
     "matchdep": "latest",
     "connect-livereload": "latest"
-  },
-  "engines": {
-    "node": ">=0.10.6"
   }
 }
