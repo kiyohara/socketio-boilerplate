@@ -1,6 +1,7 @@
 'use strict'
 
 path = require 'path'
+fs = require 'fs'
 
 # config
 conf = require 'config'
@@ -12,6 +13,10 @@ SERVER_PORT = conf.server.port || 3000
 LIVERELOAD_PORT = conf.livereload.port || 35729
 mountFolder = (connect, dir) ->
   connect.static path.resolve dir
+
+# bower
+bower = JSON.parse fs.readFileSync path.join __dirname, '.bowerrc'
+BOWER_DIR = bower.directory || "components"
 
 module.exports = (grunt) ->
   # load all grunt tasks
@@ -276,6 +281,12 @@ module.exports = (grunt) ->
           src: [
             "require.js"
           ]
+        ,
+          # font awesome font
+          expand: true
+          cwd: "#{BOWER_DIR}/font-awesome/font"
+          dest: "#{conf.statics.tmp}/styles/font"
+          src: ["*"]
         ]
       useminPrepare:
         files: [
@@ -303,6 +314,14 @@ module.exports = (grunt) ->
           dest: "#{conf.statics.dist}/images"
           src: [
             'generated/*'
+          ]
+        ,
+          # font
+          expand: true
+          cwd: "#{conf.statics.tmp}/styles/font"
+          dest: "#{conf.statics.dist}/styles/font"
+          src: [
+            '*'
           ]
         ]
 

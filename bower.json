@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "dependencies": {
     "sass-bootstrap": "latest",
+    "font-awesome": "3.0.x",
     "requirejs": "latest",
     "modernizr": "latest",
     "jquery": "latest",
