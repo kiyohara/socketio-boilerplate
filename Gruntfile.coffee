@@ -170,6 +170,7 @@ module.exports = (grunt) ->
     # grunt-contrib-compass
     compass:
       options:
+        bundleExec: false # change this if use bundler
         sassDir: "#{conf.statics.src}/styles"
         cssDir: "#{conf.statics.tmp}/styles"
         generatedImagesDir: "#{conf.statics.tmp}/images/generated"
