@@ -268,6 +268,15 @@ module.exports = (grunt) ->
 
     # grunt-contrib-copy
     copy:
+      server:
+        files: [
+          expand: true
+          cwd: "#{conf.statics.src}/bower_components/requirejs"
+          dest: "#{conf.statics.tmp}/scripts/vendor/"
+          src: [
+            "require.js"
+          ]
+        ]
       useminPrepare:
         files: [
           expand: true
@@ -300,6 +309,7 @@ module.exports = (grunt) ->
     # grunt-concurrent
     concurrent:
       server: [
+        'copy:server'
         'coffee:server'
         'compass:server'
       ]
