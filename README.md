@@ -12,6 +12,7 @@ It's ready to use:
 - require.js
 - jQuery
 - underscore
+- Twitter Bootstrap
 - Font Awesome
 - livereload w/ grunt
 
