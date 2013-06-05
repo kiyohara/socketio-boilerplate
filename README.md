@@ -7,7 +7,7 @@ It's ready to use:
 
 - socket.io
 - express w/ jade, css
-- compass(sass)
+- compass(sass w/ animate)
 - coffee script
 - require.js
 - jQuery

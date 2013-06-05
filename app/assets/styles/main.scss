@@ -5,6 +5,15 @@ $fontAwesomePath: "./font";
 @import 'sass-bootstrap/lib/bootstrap';
 @import 'font-awesome/sass/font-awesome.scss';
 @import 'sass-bootstrap/lib/responsive';
+@import 'compass';
+@import 'animate';
+
+@include animate-fadeInDown($class:true);
+@include animate-fadeOutRight($class:true);
+
+.wait-msg {
+  position: absolute;
+}
 
 .ping-unit {
   margin: 20px;
@@ -16,4 +25,21 @@ $fontAwesomePath: "./font";
 .hero-unit {
   margin: 50px auto 0 auto;
   width: 340px;
+}
+
+.hide-wait-msg {
+  @extend .fadeOutRight;
+  @include animation-duration(1s);
+  @include animation-timing-function(ease);
+  @include animation-iteration-count(1);
+  @include animation-direction(alternate);
+}
+
+.show-pong-unit {
+  display: block;
+  @extend .fadeInDown;
+  @include animation-duration(1s);
+  @include animation-timing-function(ease);
+  @include animation-iteration-count(1);
+  @include animation-direction(alternate);
 }

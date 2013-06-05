@@ -12,10 +12,19 @@ require.config(
 
 require(['jquery', 'socketio', 'bootstrap'], ($, io) ->
   'use strict'
+  _animationEnd = [
+    "oAnimationEnd"
+    "mozAnimationEnd"
+    "webkitAnimationEnd"
+    "animationend"
+  ].join " "
 
   $ ->
     $('#ping').attr 'disabled', 'disabled'
-    $('.pong-unit').hide()
+
+    $('.wait-msg').on(_animationEnd, (e) ->
+      $(this).hide()
+    )
 
     setTimeout ->
       socket = io.connect 'http://localhost'
@@ -23,7 +32,7 @@ require(['jquery', 'socketio', 'bootstrap'], ($, io) ->
       socket.on 'pong', (data) ->
         $('.pong-unit #msg').text "#{data.msg}"
         $('.pong-unit #time').text "#{data.time}"
-        $('.pong-unit').show 'fast'
+        $('.pong-unit').addClass "show-pong-unit"
 
       $('#ping').click () ->
         if socket
@@ -32,6 +41,7 @@ require(['jquery', 'socketio', 'bootstrap'], ($, io) ->
             name: $("#name").val()
 
       .removeAttr 'disabled'
-      $('#wait_msg').hide 'fast'
+
+      $('.wait-msg').addClass 'hide-wait-msg'
     , 2000
 )

@@ -171,6 +171,7 @@ module.exports = (grunt) ->
     compass:
       options:
         bundleExec: false # change this if use bundler
+        require: ['animate']
         sassDir: "#{conf.statics.src}/styles"
         cssDir: "#{conf.statics.tmp}/styles"
         generatedImagesDir: "#{conf.statics.tmp}/images/generated"
