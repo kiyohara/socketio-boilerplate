@@ -1,9 +1,9 @@
 $iconSpritePath: "../images/glyphicons-halflings.png";
 $iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
-$fontAwesomePath: "./font";
+$FontAwesomePath: "./font";
 
 @import 'sass-bootstrap/lib/bootstrap';
-@import 'font-awesome/sass/font-awesome.scss';
+@import 'font-awesome/scss/font-awesome.scss';
 @import 'sass-bootstrap/lib/responsive';
 @import 'compass';
 @import 'animate';

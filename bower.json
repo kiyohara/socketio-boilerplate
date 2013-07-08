@@ -2,12 +2,12 @@
   "name": "socketio-boilerplate",
   "version": "0.0.0",
   "dependencies": {
-    "sass-bootstrap": "latest",
-    "font-awesome": "3.0.x",
-    "requirejs": "latest",
-    "modernizr": "latest",
-    "jquery": "latest",
-    "socket.io-client": "latest"
+    "sass-bootstrap": "2.3.2",
+    "font-awesome": "3.2.1",
+    "requirejs": "2.1.7",
+    "modernizr": "2.6.2",
+    "jquery": "2.0.3",
+    "socket.io-client": "0.9.16"
   },
   "devDependencies": {
   }
